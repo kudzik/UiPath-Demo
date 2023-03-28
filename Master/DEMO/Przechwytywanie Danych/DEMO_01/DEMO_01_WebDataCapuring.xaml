@@ -1,4 +1,4 @@
-<Activity mc:Ignorable="sap sap2010" x:Class="WebDataCapuring" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="914,3463" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<Activity mc:Ignorable="sap sap2010" x:Class="WebDataCapuring" sap2010:ExpressionActivityEditor.ExpressionActivityEditor="C#" sap:VirtualizedContainerService.HintSize="914,3707" sap2010:WorkflowViewState.IdRef="ActivityBuilder_1" xmlns="http://schemas.microsoft.com/netfx/2009/xaml/activities" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:sap="http://schemas.microsoft.com/netfx/2009/xaml/activities/presentation" xmlns:sap2010="http://schemas.microsoft.com/netfx/2010/xaml/activities/presentation" xmlns:sc="clr-namespace:System.Collections;assembly=System.Private.CoreLib" xmlns:sc1="clr-namespace:System.ComponentModel;assembly=System.ComponentModel.TypeConverter" xmlns:scg="clr-namespace:System.Collections.Generic;assembly=System.Private.CoreLib" xmlns:sco="clr-namespace:System.Collections.ObjectModel;assembly=System.Private.CoreLib" xmlns:sd="clr-namespace:System.Data;assembly=System.Data.Common" xmlns:ui="http://schemas.uipath.com/workflow/activities" xmlns:uix="http://schemas.uipath.com/workflow/activities/uix" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
   <TextExpression.NamespacesForImplementation>
     <sco:Collection x:TypeArguments="x:String">
       <x:String>System.Activities</x:String>
@@ -40,6 +40,7 @@
       <x:String>System.Security</x:String>
       <x:String>UiPath.UIAutomationNext.Contracts</x:String>
       <x:String>UiPath.UIAutomationNext.Models.CV</x:String>
+      <x:String>System.Linq.Expressions</x:String>
     </sco:Collection>
   </TextExpression.NamespacesForImplementation>
   <TextExpression.ReferencesForImplementation>
@@ -106,9 +107,10 @@
       <AssemblyReference>System.Runtime.InteropServices</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.Design</AssemblyReference>
       <AssemblyReference>UiPath.System.Activities.ViewModels</AssemblyReference>
+      <AssemblyReference>System.Linq.Expressions</AssemblyReference>
     </sco:Collection>
   </TextExpression.ReferencesForImplementation>
-  <Sequence sap2010:Annotation.AnnotationText="Zakres podajemy w formacie &quot;A1:C5&quot;&#xA;Lewy gorny i prawy dolny rog&#xA;" DisplayName="WebDataCapuring" sap:VirtualizedContainerService.HintSize="642,3398" sap2010:WorkflowViewState.IdRef="Sequence_1">
+  <Sequence sap2010:Annotation.AnnotationText="Zakres podajemy w formacie &quot;A1:C5&quot;&#xA;Lewy gorny i prawy dolny rog&#xA;" DisplayName="WebDataCapuring" sap:VirtualizedContainerService.HintSize="642,3642" sap2010:WorkflowViewState.IdRef="Sequence_1">
     <Sequence.Variables>
       <Variable x:TypeArguments="sd:DataTable" Name="dt_CustomerData" />
     </Sequence.Variables>
@@ -119,7 +121,7 @@
         <x:Boolean x:Key="IsAnnotationDocked">True</x:Boolean>
       </scg:Dictionary>
     </sap:WorkflowViewStateService.ViewState>
-    <ui:ReadRange AddHeaders="True" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="580,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" Password="{x:Null}" Range="{x:Null}" SheetName="Sheet1" WorkbookPath="DEMO\Przechwytywanie Danych\DEMO_01\File Excel\customers.xlsx">
+    <ui:ReadRange Range="{x:Null}" AddHeaders="True" DisplayName="Read Range Workbook" sap:VirtualizedContainerService.HintSize="580,88" sap2010:WorkflowViewState.IdRef="ReadRange_1" SheetName="Sheet1" WorkbookPath="DEMO\Przechwytywanie Danych\DEMO_01\File Excel\customers.xlsx">
       <ui:ReadRange.DataTable>
         <OutArgument x:TypeArguments="sd:DataTable">
           <CSharpReference x:TypeArguments="sd:DataTable" sap2010:WorkflowViewState.IdRef="CSharpReference`1_1">
@@ -129,14 +131,69 @@
         </OutArgument>
       </ui:ReadRange.DataTable>
     </ui:ReadRange>
+    <ui:CommentOut DisplayName="bez petli For Each Row Comment Out" sap:VirtualizedContainerService.HintSize="580,52" sap2010:WorkflowViewState.IdRef="CommentOut_1">
+      <ui:CommentOut.Body>
+        <Sequence sap:VirtualizedContainerService.HintSize="472,593" sap2010:WorkflowViewState.IdRef="Sequence_10">
+          <sap:WorkflowViewStateService.ViewState>
+            <scg:Dictionary x:TypeArguments="x:String, x:Object">
+              <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+            </scg:Dictionary>
+          </sap:WorkflowViewStateService.ViewState>
+          <ui:LogMessage DisplayName="Log Message Pokaz wartosc z komorki" sap:VirtualizedContainerService.HintSize="410,92" sap2010:WorkflowViewState.IdRef="LogMessage_2" Level="Info">
+            <ui:LogMessage.Message>
+              <InArgument x:TypeArguments="x:Object">
+                <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_17">dt_CustomerData.Rows[1][1]</CSharpValue>
+              </InArgument>
+            </ui:LogMessage.Message>
+          </ui:LogMessage>
+          <ui:ForEach x:TypeArguments="sd:DataRow" DisplayName="For Each wartosc komorki" sap:VirtualizedContainerService.HintSize="410,350" sap2010:WorkflowViewState.IdRef="ForEach`1_2">
+            <ui:ForEach.Body>
+              <ActivityAction x:TypeArguments="sd:DataRow">
+                <ActivityAction.Argument>
+                  <DelegateInArgument x:TypeArguments="sd:DataRow" Name="currentItem" />
+                </ActivityAction.Argument>
+                <Sequence DisplayName="Body" sap:VirtualizedContainerService.HintSize="376,180" sap2010:WorkflowViewState.IdRef="Sequence_7">
+                  <sap:WorkflowViewStateService.ViewState>
+                    <scg:Dictionary x:TypeArguments="x:String, x:Object">
+                      <x:Boolean x:Key="IsExpanded">True</x:Boolean>
+                    </scg:Dictionary>
+                  </sap:WorkflowViewStateService.ViewState>
+                  <ui:LogMessage DisplayName="Log Message wartosc w petli" sap:VirtualizedContainerService.HintSize="334,92" sap2010:WorkflowViewState.IdRef="LogMessage_3" Level="Info">
+                    <ui:LogMessage.Message>
+                      <InArgument x:TypeArguments="x:Object">
+                        <CSharpValue x:TypeArguments="x:Object" sap2010:WorkflowViewState.IdRef="CSharpValue`1_19">currentItem[1]</CSharpValue>
+                      </InArgument>
+                    </ui:LogMessage.Message>
+                  </ui:LogMessage>
+                </Sequence>
+              </ActivityAction>
+            </ui:ForEach.Body>
+            <ui:ForEach.CurrentIndex>
+              <OutArgument x:TypeArguments="x:Int32" />
+            </ui:ForEach.CurrentIndex>
+            <ui:ForEach.Values>
+              <InArgument x:TypeArguments="sc:IEnumerable">
+                <CSharpValue x:TypeArguments="sc:IEnumerable" sap2010:WorkflowViewState.IdRef="CSharpValue`1_18">dt_CustomerData.Rows</CSharpValue>
+              </InArgument>
+            </ui:ForEach.Values>
+          </ui:ForEach>
+        </Sequence>
+      </ui:CommentOut.Body>
+      <sap:WorkflowViewStateService.ViewState>
+        <scg:Dictionary x:TypeArguments="x:String, x:Object">
+          <x:Boolean x:Key="IsExpanded">False</x:Boolean>
+          <x:Boolean x:Key="IsPinned">False</x:Boolean>
+        </scg:Dictionary>
+      </sap:WorkflowViewStateService.ViewState>
+    </ui:CommentOut>
     <ui:Comment DisplayName="Comment CRM URL" sap:VirtualizedContainerService.HintSize="580,114" sap2010:WorkflowViewState.IdRef="Comment_1" Text="&quot;https://www.theautomationchallenge.com/crm&quot;&#xA;&#xA;&quot;CRMChallange&quot;" />
-    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" ConnectionId="{x:Null}" ContinueOnError="{x:Null}" DisplayName="Use Browser Edge: CRM" sap:VirtualizedContainerService.HintSize="580,2948" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InUiElement="{x:Null}" InteractionMode="DebuggerApi" IsIncognito="{x:Null}" OpenMode="IfNotOpen" OutUiElement="{x:Null}" ScopeGuid="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" UserDataFolderMode="{x:Null}" UserDataFolderPath="{x:Null}" Version="V2" WebDriverMode="{x:Null}">
+    <uix:NApplicationCard AttachMode="ByInstance" CloseMode="Never" DisplayName="Use Browser Edge: CRM" sap:VirtualizedContainerService.HintSize="580,3100" sap2010:WorkflowViewState.IdRef="NApplicationCard_1" InteractionMode="DebuggerApi" OpenMode="IfNotOpen" ScopeGuid="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V2">
       <uix:NApplicationCard.Body>
         <ActivityAction x:TypeArguments="x:Object">
           <ActivityAction.Argument>
             <DelegateInArgument x:TypeArguments="x:Object" Name="WSSessionData" />
           </ActivityAction.Argument>
-          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="546,2731" sap2010:WorkflowViewState.IdRef="Sequence_2">
+          <Sequence DisplayName="Do" sap:VirtualizedContainerService.HintSize="546,2883" sap2010:WorkflowViewState.IdRef="Sequence_2">
             <Sequence.Variables>
               <Variable x:TypeArguments="x:Int32" Name="ZeroBaseIndex" />
             </Sequence.Variables>
@@ -145,13 +202,13 @@
                 <x:Boolean x:Key="IsExpanded">True</x:Boolean>
               </scg:Dictionary>
             </sap:WorkflowViewStateService.ViewState>
-            <ui:ForEachRow ColumnNames="{x:Null}" DisplayName="For Each Row in Data Table Customer" sap:VirtualizedContainerService.HintSize="484,2616" sap2010:WorkflowViewState.IdRef="ForEachRow_1" MaxIterations="{x:Null}" Values="{x:Null}">
+            <ui:ForEachRow ColumnNames="{x:Null}" DisplayName="For Each Row in Data Table Customer" sap:VirtualizedContainerService.HintSize="484,2770" sap2010:WorkflowViewState.IdRef="ForEachRow_1">
               <ui:ForEachRow.Body>
                 <ActivityAction x:TypeArguments="sd:DataRow">
                   <ActivityAction.Argument>
                     <DelegateInArgument x:TypeArguments="sd:DataRow" Name="CurrentRow" />
                   </ActivityAction.Argument>
-                  <Sequence DisplayName="Body For Each Table" sap:VirtualizedContainerService.HintSize="450,2499" sap2010:WorkflowViewState.IdRef="Sequence_3">
+                  <Sequence DisplayName="Body For Each Table" sap:VirtualizedContainerService.HintSize="450,2653" sap2010:WorkflowViewState.IdRef="Sequence_3">
                     <sap:WorkflowViewStateService.ViewState>
                       <scg:Dictionary x:TypeArguments="x:String, x:Object">
                         <x:Boolean x:Key="IsExpanded">True</x:Boolean>
@@ -167,11 +224,11 @@
                         </InArgument>
                       </ui:LogMessage.Message>
                     </ui:LogMessage>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'First'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_1" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'First'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_1" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" DesignTimeRectangle="230, 237, 233, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='INPUT' type='input' class='bubble-element Input a1679987854808x1629' aaname='' /&gt;" Guid="a94a9fb4-cab2-429c-ba20-8c5c4493b4f1" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAO0AAAAmCAYAAAAoYhz4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEeSURBVHhe7d29ioNQFIXRef9nNIVgaRobixR3OGGU/Jgp492wFpxGtPy42nh+GhBFtBDmLdplWdo0Te1yubRhGIwxJ0z1Vx1Wj6+eop3nuY3jeHgj8D232+3eYfVYXT7ao91uAPpR8b4epHu0n45i4Fzrut773OzR1jt0VQ30pbqsPjd7tPXxC/TpsU/RQgDRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQpjDaP2sHPp1+LPyWjtQ6weAvtS6nsO1IBZwQX/+XcBVtlWX1+v17wpwhoq1Qq1v2Y+rLjfbUVzv0PWAMeb7U/192mT5Fi3QN9FClNZ+ARIpXKBAts6OAAAAAElFTkSuQmCC" InformativeScreenshot="a4743482b3bd51e952584e29712bbd5a.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                               <uix:Target DesignTimeRectangle="176, 237, 54, 22" ElementType="Text" FriendlyName="'First'" FullSelectorArgument="&lt;webctrl aaname='First:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='First:' class='content' tag='DIV' type='' check:innerText='First:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADoAAAAaCAYAAADmF08eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAGmSURBVFhH7ZWxa8JAFIf7fx0IBSFQyOaULThkC4VKh1KIU6VQ6VAKpR0MBXHK5JahRCgdxA7ipCgqSKBgFp2ChV8vuSuJJQ6VKHLmgxDey124j3v37gRHQiYqGkchOp/PxRddLBaYTqfii85ms1BWeNHRaITVaiW+6HA4DN9rouOaCkJI8mM4dISH5sUpSNHEmE05eDaLhkKbWMK5U6AYTbg8sy2OQVB+48EO2VI0PQ5eNBij1qLCDRasPlqoFqWwxLU622uvVYUm0zIPyj4vQ7u14X4HXz5Qya8fi10KpypK5CtYE59nKF8W9JyK5y7P+WNYlxKUpx6LKck7mt7R+OUfzaiMuHqSqPLS5xFnYkI9q8CJucPtwP6Mlr9J1L5Ot9mlW7qxmLFE50mHJBWg35iwuy78sGwjkkXTZ8eiHN9Fr9VA9bwAqVCCNeB5ihiiQZm+9+m+Rrh1be3fgog2oNFm9ND2WMybkXzfYTElmKfQOH6M99uMthF9/SNK8domSgq7ckhOgmpY6MetBiZ0fv1EO7unZiQimahoZKKikYmKBhMFfgDHX6ocH90AtwAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image" />
                             </scg:List>
                           </uix:TargetAnchorable.Anchors>
@@ -179,18 +236,15 @@
                       </uix:NTypeInto.Target>
                       <uix:NTypeInto.Text>
                         <InArgument x:TypeArguments="x:String">
-                          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_2">
-                            <CSharpValue.Result>
-                              <OutArgument x:TypeArguments="x:String" />
-                            </CSharpValue.Result>CurrentRow["first name"].ToString()</CSharpValue>
+                          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_20">CurrentRow["first name"].ToString()</CSharpValue>
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'Last'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_3" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Last'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_3" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" DesignTimeRectangle="230, 279, 233, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tabindex='5' tag='INPUT' /&gt;" FuzzySelectorArgument="&lt;webctrl tabindex='5' tag='INPUT' type='input' class='bubble-element Input a1679987854808x1629' aaname='' /&gt;" Guid="8392ee4c-771d-4b1c-bf22-da00e246e8ea" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAO0AAAAmCAYAAAAoYhz4AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEeSURBVHhe7d29ioNQFIXRef9nNIVgaRobixR3OGGU/Jgp492wFpxGtPy42nh+GhBFtBDmLdplWdo0Te1yubRhGIwxJ0z1Vx1Wj6+eop3nuY3jeHgj8D232+3eYfVYXT7ao91uAPpR8b4epHu0n45i4Fzrut773OzR1jt0VQ30pbqsPjd7tPXxC/TpsU/RQgDRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQhjRQpjDaP2sHPp1+LPyWjtQ6weAvtS6nsO1IBZwQX/+XcBVtlWX1+v17wpwhoq1Qq1v2Y+rLjfbUVzv0PWAMeb7U/192mT5Fi3QN9FClNZ+ARIpXKBAts6OAAAAAElFTkSuQmCC" InformativeScreenshot="82a44c534f9f212caea1f130814827e9.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                               <uix:Target DesignTimeRectangle="176, 279, 54, 22" ElementType="Text" FriendlyName="'Last'" FullSelectorArgument="&lt;webctrl aaname='Last:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Last:' class='content' tag='DIV' type='' check:innerText='Last:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAADoAAAAaCAYAAADmF08eAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHdSURBVFhH7ZSxa8JAFIf7fx0IQiFQyFYQhA6hoHQRBynUpU4NQqWDWxali13SxU4RikJJodhB2iXFYEUJCAaKQiEo/HpeTo2FUhCxeM0HR3j3bsh3793bwz8hFBWNfyE6HA7FFx2NRuh2u+KL9vt9Jiu8qG3bmEwm4ou22232XRHtlBSQ8zqPxODvRO9zW73MUPTXn3DrKKbjkCIEhEQhJ1QYPZ6b4VmonM7zBFI8g/LzmKXMfJTtLdYWhNcUdVA5IVCumnCns9iDc5elMhpeWJ7KXEqQzw04nh+7TwUokSyqvuvPFbUrSB0mobV4vCHWrqjnuvCY5Jw6ciQFfcCjC4LkdccPGGNYDyas30RfNcQjMtTG/OBmWF/03YCakBENtiBRULb5gV4VuZgE6TiD4g0V/OClnbMTb3RMq3cgI3trBao6q2hAlOO9mdBLOSiSRFvdpHXl7IToYwHSkQaLh4xxFZmF6KxNDTQdlvGZmlAPAhexE6IDHSkqpbV4O35a0M/kldY183QYnenorAyj5RtmovECmt86evvDaOXtLZdS8geMU1NpO/p7UTkJtVZBNti6XgdGPgl5n5+JpVBsuDxJmVoop/kbD17qNoeRiISiohGKikYoKhq+KPAFauGuYuM7alYAAAAASUVORK5CYII=" SearchSteps="FuzzySelector, Image" />
                             </scg:List>
                           </uix:TargetAnchorable.Anchors>
@@ -207,7 +261,7 @@
                     </uix:NTypeInto>
                     <ui:IfElseIf DisplayName="Else If Gender" sap:VirtualizedContainerService.HintSize="388,52" sap2010:WorkflowViewState.IdRef="IfElseIf_1">
                       <ui:IfElseIf.ConditionBlocks>
-                        <sc:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
+                        <sc1:BindingList x:TypeArguments="ui:IfElseIfBlock" AllowEdit="True" AllowNew="True" AllowRemove="True" RaiseListChangedEvents="True">
                           <ui:IfElseIfBlock BlockType="If">
                             <ui:IfElseIfBlock.Condition>
                               <InArgument x:TypeArguments="x:Boolean">
@@ -224,7 +278,7 @@
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NCheck Action="Check" AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Check/Uncheck 'unchecked'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NCheck_1" InScope="{x:Null}" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                                <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'unchecked'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NCheck_1" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                                   <uix:NCheck.Target>
                                     <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" DesignTimeRectangle="284, 330, 54, 14" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'unchecked'" FullSelectorArgument="&lt;webctrl tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='LABEL' type='' class='' aaname='Male' check:innerText='Male' /&gt;" Guid="bf288bd0-ba2e-443c-8a78-c6eb851ad665" InformativeScreenshot="0c9e2367de727189ce5f6c144c42986c.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive" />
                                   </uix:NCheck.Target>
@@ -240,7 +294,7 @@
                                     <x:Boolean x:Key="IsExpanded">True</x:Boolean>
                                   </scg:Dictionary>
                                 </sap:WorkflowViewStateService.ViewState>
-                                <uix:NCheck Action="Check" AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Check/Uncheck 'checked'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NCheck_2" InScope="{x:Null}" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                                <uix:NCheck Action="Check" DisplayName="Check/Uncheck 'checked'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NCheck_2" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                                   <uix:NCheck.Target>
                                     <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" DesignTimeRectangle="357, 330, 54, 14" DesignTimeScaleFactor="1" ElementType="Text" FriendlyName="'checked'" FullSelectorArgument="&lt;webctrl aaname='Female' tag='LABEL' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Female' tag='LABEL' type='' class='' check:innerText='Female' /&gt;" Guid="4c598375-625d-4324-93fd-5c6df8dba5ff" InformativeScreenshot="f3340f724bad39c6a407ca4c2d6407ac.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive" />
                                   </uix:NCheck.Target>
@@ -248,7 +302,7 @@
                               </Sequence>
                             </ui:IfElseIfBlock.Then>
                           </ui:IfElseIfBlock>
-                        </sc:BindingList>
+                        </sc1:BindingList>
                       </ui:IfElseIf.ConditionBlocks>
                       <sap:WorkflowViewStateService.ViewState>
                         <scg:Dictionary x:TypeArguments="x:String, x:Object">
@@ -257,11 +311,11 @@
                         </scg:Dictionary>
                       </sap:WorkflowViewStateService.ViewState>
                     </ui:IfElseIf>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'City'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_4" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'City'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_4" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvType="InputBox" DesignTimeRectangle="619, 279, 199, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tabindex='8' tag='INPUT' type='input' /&gt;" FuzzySelectorArgument="&lt;webctrl tabindex='8' tag='INPUT' type='input' class='bubble-element Input a1679990645263x1629' aaname='' /&gt;" Guid="ad1e3e14-7630-4eac-abbb-84341d7cfc4b" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMsAAAAmCAYAAABqIW9vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7d2xjoJAFIbRff9nlMKEEhoaC4vZXNlhVdD8Peck0xjs5stAc+enARGxQGgXy7IsbRzHNgxDu1wulnWqVfu+9n918O4llmma2vV6PXwQzuB+vz/2f3VQPTzbYukPAGs07wfHFsunowfO6na7PbrotljqXa1qAlbVQ3XRbbHUxw3w6rkLscAXYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggJBYIiQVCYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggdBiLIXuwdzhkr8ZU1rhKYFXjjA/HtxoMDv++DgYv/cqJeZ7/foFzqUgqkPpW+XjlRNePnnpXqz9Y1plW7ftPN0rsYgGOiQUirf0CPD1biBUjgK4AAAAASUVORK5CYII=" InformativeScreenshot="c5b9287b899abb9240a33d29ae3ae0d6.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                               <uix:Target CvTextArgument="City:" CvType="Text" DesignTimeRectangle="531, 279, 88, 22" ElementType="Text" FriendlyName="'City'" FullSelectorArgument="&lt;webctrl aaname='City:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='City:' class='content' tag='DIV' type='' check:innerText='City:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFwAAAAaCAYAAAA67jspAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAHzSURBVGhD7Zexa8JAFIf7fwUKghAQst2UyS4NHSoO0qFLOzU4OEmhuDRLcSh2aacOolAiFJdiF8FgBQkU7KKTKPyaXM6a2mu1UG9o3gchvOTI8CX5vXc7IJRCwhVDwhVDwhUyGo1IuCrG4zEGgwEJV8VwOOTSSbgiPM/DbDYj4aro9Xr8/EX426ODgqlD07TgSMHYt3H/MhV3Q9ooMw3GWQMTcYVYj1T4pGnDSFuotHxwxfMpujfHYOk9OB5fEtBHNc9gXXREHVA/hXbSEAUhQyJ8gtsjDdaVL+olblEHO48JXoWEr0UivA8nq+G0LsoYk5aD0l1fVEDjZLnOLaZE/IgjFD93YWdMVJ6jNRE+qgfy5yeBXwlfJS6cI/nCw7/CjMeOX4WVseHORe1VkWNBfD2J+p+zdeFolaCbFSyU+1cW9KIrqoDnCsxdA3YzGa13+8ID1WW2iJU31A512A/8RiL5swznfNM0OxdmFCuvNeQyJcS+78QhEb75lLKpcB4bWQfude7nKScBSIRvOod/I9wsoR3fH3HCv8aAYTCUV5sjNc2I9TtNifB5F07eQGoxFsboX+4FL2PZPD+gprkdOufs83iYUJQIn74EsZHOofa1LSSOrQsPY0dLMxSuu+JKslEWKUQECVcMCVcMCVdMJBx4ByFhganoQDbeAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image, CV" />
                             </scg:List>
                           </uix:TargetAnchorable.Anchors>
@@ -276,7 +330,7 @@
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NSelectItem AlterIfDisabled="{x:Null}" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Select Item 'State'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NSelectItem_1" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NSelectItem DisplayName="Select Item 'State'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NSelectItem_1" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NSelectItem.Item>
                         <InArgument x:TypeArguments="x:String">
                           <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_10">
@@ -342,18 +396,18 @@
                       <uix:NSelectItem.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" DesignTimeRectangle="619, 321, 199, 34" DesignTimeScaleFactor="1" ElementType="DropDown" FriendlyName="'Choose a state...'" FullSelectorArgument="&lt;webctrl tag='SELECT' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='SELECT' type='' class='bubble-element Dropdown dropdown-chevron' aaname='' /&gt;" Guid="1cb42ea4-d0ca-4a6b-9a77-2bcf8073ff12" ImageBase64="" InformativeScreenshot="450850979273df1ecaf9292ade36c5cc.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                               <uix:Target DesignTimeRectangle="531, 321, 88, 22" ElementType="Text" FriendlyName="'State'" FullSelectorArgument="&lt;webctrl aaname='State:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='State:' class='content' tag='DIV' type='' check:innerText='State:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFwAAAAaCAYAAAA67jspAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKeSURBVGhD7ZfPa+JAFMf3/woIAUEozK1QCCw0FCo9rPQghYZCvbihWPFQeskp7CUnvSispFCyFxcWe1g8KRSFQsBDYEEsBITvTuIYf43rIsuA7nwg6EzmKfk4897zAyRCkcIFI4ULpNlsSuGiiGQ3Gg0pXBSlUgnj8VgKF0WxWIxfpXBBSOGC4Quf+HDvsiAZBYpCrzSBdmWjHbD7kp3hCB/B+0xArqvovrOp0EfrUYdCTHgjNoc+7FMd9isb/jW7xh0GHOEtlI80WD02TIhEKSg8s6EUvhMc4VTImYJ8bT1/+C8u2j598+YgG6Wa5FoQGHh4uNSQSUXzKsi5CfeN3ftTXJzGdBanIKPlYb8kx+lg4OfwXhU5ouL4yoLXC9nkKryd6sO5UKBX2ggm0TiE3zCoPAud+H4EL46msVsC/XEh7tnEccpAPXFO19xr0G7r9Fv2F77wiEmATq2M3IkK9SSH8tc+1bAIPzWEQYAwljbDQ0HJoTpkQ17cxIWhGHCX4gJUPykwv7EhFe7eqFDObPoJ+8tm4QuEPRfmKRV/YaObSNkgfEDXnhOom1IHL+7Vhr60fn7Na8ZhsC586MGq1Nd30aQLixZNozE74xxxI7qbjwiMWndhl0c7fIvwQSS8QFcePuvC44dfPd5T3Buan7/MfgqOuO9lZD5a6LJhzKiO/DbhVLWZysJZSc5huKl+7C+clOLHuTPuw3/NHjgqYmVo6VVxK93MkBZbKtf6yeLeu6heE5oatsRRWve097900GG9f/DjAXo6j3qy7JCLZtiHW8lBm/3TTGWm7d1geceNaCcxXTMX6j+Z0FmcSrIwnxxaEJd3NC9urS08K8BZagv/o6Ip+XdI4YKRwgUjhQtGCheMFC4YKVwwU+HAb9d2F2Ou+aLmAAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image" />
                             </scg:List>
                           </uix:TargetAnchorable.Anchors>
                         </uix:TargetAnchorable>
                       </uix:NSelectItem.Target>
                     </uix:NSelectItem>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'Home'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_5" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Home'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_5" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvType="InputBox" DesignTimeRectangle="962, 240, 199, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tabindex='10' tag='INPUT' type='input' /&gt;" FuzzySelectorArgument="&lt;webctrl tabindex='10' tag='INPUT' type='input' class='bubble-element Input a1679990645263x1629' aaname='' /&gt;" Guid="4d256dc2-bfac-4bd8-ad78-9fbf7617232c" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMsAAAAmCAYAAABqIW9vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7d2xjoJAFIbRff9nlMKEEhoaC4vZXNlhVdD8Peck0xjs5stAc+enARGxQGgXy7IsbRzHNgxDu1wulnWqVfu+9n918O4llmma2vV6PXwQzuB+vz/2f3VQPTzbYukPAGs07wfHFsunowfO6na7PbrotljqXa1qAlbVQ3XRbbHUxw3w6rkLscAXYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggJBYIiQVCYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggdBiLIXuwdzhkr8ZU1rhKYFXjjA/HtxoMDv++DgYv/cqJeZ7/foFzqUgqkPpW+XjlRNePnnpXqz9Y1plW7ftPN0rsYgGOiQUirf0CPD1biBUjgK4AAAAASUVORK5CYII=" InformativeScreenshot="d704ef5c32d1861402bc53cdd0627511.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="1">
                               <uix:Target CvTextArgument="Home:" CvType="Text" DesignTimeRectangle="877, 240, 85, 22" ElementType="Text" FriendlyName="'Home'" FullSelectorArgument="&lt;webctrl aaname='Home:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Home:' class='content' tag='DIV' type='' check:innerText='Home:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFkAAAAaCAYAAADcx/BtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAICSURBVGhD7ZaxSyNBFIfv/xoQAsKAsF1A2CqLcMHCVNskTawMFotwNhILFxsLWZt0CkcE0UYL0UbJshcMASE2WRCWBH7uTEbdxOipuR2S430Qwtt57y18O8ybHyBShyRrgCRrgCSnTKfTIclp0u120Ww2SXKatFotKZokp4jv++j1eiQ5TRqNhvwfkhzsWGDluooS+C4stooxK8QHkGQNkGQNTC757hCVnwYyjIHNcVjrh2j31VpMvcxglR3YJgcTOdyCcxIiPNlEYTEjn2UWbXi3qkARXriw1TqbN5Af6TtLTCY5rKNiGCgdBIhEHAXwigZYsYZQJgwks5yD8wcRRQj2bfAFA2bRQyCK+g8434jfZ1ZxJVIE4j1GCd4f2RV4vIK7wmFuvWTEOXsoZPOoXqp4inlfsthBY38JyUclsOU9tFUoCWuwmY2asix38k4wCCSncBY4nDMVCu49FBJ9b7ZNmNs3KlKcOeBLLl46XVdhzhmoHD9/zullop08Pq+OVWbB9VX0RnIAN/e6PkDUvPaVu3/cB84lJM8Q0yl5bbRmtpnsTP7WcfF3ycGuBb5+qiJFP0JEgy9GDT4e1yYH31clox2f0fMmnN/tob7ZX//b4PuMZMFnrnC7X5QcM3yFy6KwMXKFm/XBR/xbSLIGSLIGSLIGSLIGSLIGSLIGBpKBJz5F+eNOre++AAAAAElFTkSuQmCC" SearchSteps="FuzzySelector, Image, CV" />
                             </scg:List>
                           </uix:TargetAnchorable.Anchors>
@@ -368,11 +422,11 @@
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'Work'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_6" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Work'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_6" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvType="InputBox" DesignTimeRectangle="962, 282, 199, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tabindex='11' tag='INPUT' type='input' /&gt;" FuzzySelectorArgument="&lt;webctrl tabindex='11' tag='INPUT' type='input' class='bubble-element Input a1679990645263x1629' aaname='' /&gt;" Guid="d00a3b61-a446-4ba3-8f94-414e622a49cf" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMsAAAAmCAYAAABqIW9vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7d2xjoJAFIbRff9nlMKEEhoaC4vZXNlhVdD8Peck0xjs5stAc+enARGxQGgXy7IsbRzHNgxDu1wulnWqVfu+9n918O4llmma2vV6PXwQzuB+vz/2f3VQPTzbYukPAGs07wfHFsunowfO6na7PbrotljqXa1qAlbVQ3XRbbHUxw3w6rkLscAXYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggJBYIiQVCYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggdBiLIXuwdzhkr8ZU1rhKYFXjjA/HtxoMDv++DgYv/cqJeZ7/foFzqUgqkPpW+XjlRNePnnpXqz9Y1plW7ftPN0rsYgGOiQUirf0CPD1biBUjgK4AAAAASUVORK5CYII=" InformativeScreenshot="5f660b6226fdb778036a00998ef0dd4b.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
-                            <scg:List x:TypeArguments="uix:ITarget" Capacity="4">
+                            <scg:List x:TypeArguments="uix:ITarget" Capacity="2">
                               <uix:Target CvTextArgument="Work:" CvType="Text" DesignTimeRectangle="877, 284, 85, 22" ElementType="Text" FriendlyName="'Work'" FullSelectorArgument="&lt;webctrl aaname='Work:' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Work:' class='content' tag='DIV' type='' check:innerText='Work:' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFkAAAAaCAYAAADcx/BtAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKKSURBVGhD7ZfBa9pwFMf3f/2gUCgEBG855WTwID3UkxTmpblJoTmJMOxBGYwehofhTjsUB8PC6A7FXgSlE6RQUBjmNBS+e7/kZcaYgGuXDLPf52LezyD48fl9L6+gSBwlOWFms5mSnCSLxQKTyURJTpLpdOqKVpITZDweY7lcKslJMhqN3FclOUGU5BTYkjx/X4Y47cLh2sNB91RAnPW4XtM/12C2Hrh6Dg9oFwRqn7nMINudPG7DPLDQW3Ht0oedI8k5m66CyHMd9Tsun4Un2brmMoNExMUAdV2DfcOl5K4OvWDBKoSEyvMt8X/KfymZ+vNCg94YcEUaWia0iz4GDX0jGuR5MEKcb21UDA1CUNcf6ai0bjdip3cmYDY6sIvePaV3j3QaluzQfXnk6XM3I2t/iR581xZEoU1fXzJH54QlyPOTDp2szysfWIWMmSMT9a/eu5jfol4UMN6sfywpWeSr6Hz/ySeSoGRPsCi2MQzG1fgKZb2E5oti6d8RLXnVg3VQRufJv66gK106XVRE8JrvIYaXBrTzUHDIONHrFEAeUrJxOeTKx5fs0D/IgNCq+PSD3/K5b8I4yNNw3M/ejpbM24TbpTc2NOqsyK7+3e0cBeEtQ3a3oCHKZeQ9LNksmjgs2qgdC1Q/7qfMOGIk8yr3uos+5XBUPsvcDkfBSyT7EeHQj6cdX0GmdVaIleytcibMQmjTkJ1N+VjSNzeNXeMiTvJ68A3QpOFZ+8JlBoiX7K5y1GGCMjI4hNyMjtiZYwZfUOpukoFH+hcdBh+IMjn4GBkJ623CJ/7pb6cV7m205I0nvlUftZyB5j3X2Rx8ir+JkpwCSnIKKMkpoCSngJKcAkpyCniSgV+kYQFg2pYloQAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image, CV" />
                               <uix:Target CvTextArgument="Phone" CvType="Text" DesignTimeRectangle="863, 187, 79, 22" ElementType="Text" FriendlyName="'Phone'" FullSelectorArgument="&lt;webctrl aaname='Phone' class='content' tag='DIV' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Phone' class='content' tag='DIV' type='' check:innerText='Phone' /&gt;" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAFMAAAAaCAYAAADL5WCkAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJISURBVGhD7Zexa9tAFIf7fwkMhsCB4fCgSVNFoCVDvVSBeLGnmkKFhyylAYsunVIoCRQcKOrgQPBS2sVDUCZPgoAngUHLr/ek80mRZae0l6Lhhg90p3dP0ne6e9KzNE1h0IORqREjUyNGpkaMTI0YmRoxMjViZGqkkHkXwLUsWFWYA28yR7zO48KB7H8TPkhkKMu8LWSyrg3bFvC2ksrfzbI4JXNgZFapkekiuC0C4s9eLq81RCjeTiNzN4/KrPYrma9H8A9ZfsxcjK6WxRjB8spHz5HnWwzOcYD5/XbO4diDfUDHbdjlGCJZ4HzwEjw7L1aM4yG4iYvzDWO/zHWCn2euFFJ5MwnG1YNaloMPv/Jxq29DcBnT5hysJWO4jxntvepaRBu8K6UTJxdYZddeIDiUfWIyuNpyOPxreX8No3bPrMOdLLI4JfMoQERi7qfod2TMx0jERAie521nPEdCuUsx3pdV6VoMo+9JlnehJm2EkMaICcnaHdFO8ntUMa/OEVNMw9hfgIgXHk6/RrkUwfaeWchzJyQzxDDLY+P0h8xdGseokNWtgo08S6wA0Y4mUlwdG+EN4/E9s8J/l0lLfDOxCrFdyLxN4glk7l/m/cvyMt8tM732wajd6WMayxhRkD69v8BSfvM2jSeQ+bAAUZHaXYD2yKS8mwIkYN0ij/12pradJvH3MtUf0LZMIr4J4P3Bp1FwJ/u2ZArWS0zHPTgsz09/Y73xFJEsSE2jkGn4Z4xMjRiZGjEyNWJkasTI1IiRqY0UvwHTRS9Vwaq9ZgAAAABJRU5ErkJggg==" SearchSteps="FuzzySelector, Image, CV" />
                             </scg:List>
@@ -388,7 +442,7 @@
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'Work Email'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_7" InScope="{x:Null}" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Work Email'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_7" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvType="InputBox" DesignTimeRectangle="1309, 322, 199, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tabindex='13' tag='INPUT' type='email' /&gt;" FuzzySelectorArgument="&lt;webctrl tabindex='13' tag='INPUT' type='email' class='bubble-element Input a1679990645263x1629' aaname='' /&gt;" Guid="382a7fc2-c67a-45e3-b3a5-2e444d4a4050" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMsAAAAmCAYAAABqIW9vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7d2xjoJAFIbRff9nlMKEEhoaC4vZXNlhVdD8Peck0xjs5stAc+enARGxQGgXy7IsbRzHNgxDu1wulnWqVfu+9n918O4llmma2vV6PXwQzuB+vz/2f3VQPTzbYukPAGs07wfHFsunowfO6na7PbrotljqXa1qAlbVQ3XRbbHUxw3w6rkLscAXYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggJBYIiQVCYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggdBiLIXuwdzhkr8ZU1rhKYFXjjA/HtxoMDv++DgYv/cqJeZ7/foFzqUgqkPpW+XjlRNePnnpXqz9Y1plW7ftPN0rsYgGOiQUirf0CPD1biBUjgK4AAAAASUVORK5CYII=" InformativeScreenshot="a7095bcf248d7e265f97a027d3cccf6c.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector, Image, CV" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
@@ -408,7 +462,7 @@
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NTypeInto ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickBeforeMode="None" ContinueOnError="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DelayBetweenKeys="{x:Null}" DeselectAfter="{x:Null}" DisplayName="Type Into 'Personal Email'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_8" InScope="{x:Null}" InUiElement="{x:Null}" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NTypeInto ActivateBefore="True" ClickBeforeMode="None" DisplayName="Type Into 'Personal Email'" EmptyFieldMode="SingleLine" sap:VirtualizedContainerService.HintSize="388,218" sap2010:WorkflowViewState.IdRef="NTypeInto_8" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NTypeInto.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvType="InputBox" DesignTimeRectangle="1309, 280, 199, 34" DesignTimeScaleFactor="1" ElementType="InputBox" FriendlyName="'INPUT'" FullSelectorArgument="&lt;webctrl tag='INPUT' type='email' /&gt;" FuzzySelectorArgument="&lt;webctrl tag='INPUT' type='email' class='bubble-element Input a1679990645263x1629' aaname='' /&gt;" Guid="a1c7a121-1db2-4799-91e7-a9f8e7e76262" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAMsAAAAmCAYAAABqIW9vAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAEUSURBVHhe7d2xjoJAFIbRff9nlMKEEhoaC4vZXNlhVdD8Peck0xjs5stAc+enARGxQGgXy7IsbRzHNgxDu1wulnWqVfu+9n918O4llmma2vV6PXwQzuB+vz/2f3VQPTzbYukPAGs07wfHFsunowfO6na7PbrotljqXa1qAlbVQ3XRbbHUxw3w6rkLscAXYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggJBYIiQVCYoGQWCAkFgiJBUJigZBYICQWCIkFQmKBkFggdBiLIXuwdzhkr8ZU1rhKYFXjjA/HtxoMDv++DgYv/cqJeZ7/foFzqUgqkPpW+XjlRNePnnpXqz9Y1plW7ftPN0rsYgGOiQUirf0CPD1biBUjgK4AAAAASUVORK5CYII=" InformativeScreenshot="d8599623f46876a06b97e675a5815d6c.png" IsResponsive="True" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector, Image, CV" Version="V2" Visibility="Interactive">
                           <uix:TargetAnchorable.Anchors>
@@ -427,11 +481,18 @@
                         </InArgument>
                       </uix:NTypeInto.Text>
                     </uix:NTypeInto>
-                    <uix:NClick ActivateBefore="True" AlterIfDisabled="{x:Null}" ClickType="Single" ContinueOnError="{x:Null}" CursorMotionType="{x:Null}" DelayAfter="{x:Null}" DelayBefore="{x:Null}" DisplayName="Click 'Add'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_1" InScope="{x:Null}" InUiElement="{x:Null}" KeyModifiers="None" MouseButton="Left" OutUiElement="{x:Null}" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Timeout="{x:Null}" Version="V3">
+                    <uix:NClick ActivateBefore="True" ClickType="Single" DisplayName="Click 'Add'" sap:VirtualizedContainerService.HintSize="388,157" sap2010:WorkflowViewState.IdRef="NClick_1" KeyModifiers="None" MouseButton="Left" ScopeIdentifier="152c15f1-61cd-4d07-b018-0a0bced08b8e" Version="V3">
                       <uix:NClick.Target>
                         <uix:TargetAnchorable BrowserURL="https://www.theautomationchallenge.com/crm" CvElementArea="156, 387, 98, 34" CvTextArea="188, 396, 31, 14" CvTextArgument="Add" CvType="Button" DesignTimeRectangle="159, 390, 92, 28" DesignTimeScaleFactor="1" ElementType="Button" FriendlyName="'Add'" FullSelectorArgument="&lt;webctrl aaname='Add' tag='BUTTON' /&gt;" FuzzySelectorArgument="&lt;webctrl aaname='Add' tag='BUTTON' type='' class='bubble-element Button clickable-element' check:innerText='Add' /&gt;" Guid="9fe09e82-16b1-44bc-8322-c83d126afa15" ImageBase64="iVBORw0KGgoAAAANSUhEUgAAAGAAAAAgCAYAAADtwH1UAAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAKESURBVGhD7Zq9attQGIZ1M4VeQ8aSPZsD3QpZMnbr1tF06R2ELBm6drFRNuOhlAZ1KAKDa0wQwWDjGivh2JJdv/WrExlJPgVB9Qf9BI9BOq88PJ/OD5xjhWEIslqt4Ps+ZrMZPM/DeDzGaDQSCoAu6ZRu6ZiuY+9WEARQSmGxWERBx3HQ6/Vg2za63S46nY7wD9AhXdIp3dIxXdM53VusBh8Mh0P0+330P7yH+/oU3ulLPLx6IRQAXdIp3dIxXdM53VvsEqwKG769fWP8A6E46Jiu6ZzuLY5L7BqsjukFoXjoms7p3uLkwPGJXcQUFoqHrumc7i12BU4SMuZXB13TOd1bXCZxpjYFhfKgc7qPCsDlkikklAedSwFqpJkFaNv4DX3t7trmTJZPrn5hcGVuj8mbq4hGFmB+62lJvNQXLA2ZI6QARXGGp3vtCFv+TLFqm3IZpAAFcXmDDQXtv3x1t45cbW8vDNkW/O9T7KLAEsHgudccic2bq4fGFWCS+EIn144Wd3+DaSaXHKZ2ShcqujJi8+bqonEF8H9oSZvPZ3g4v0IY3bl4PE/mLqAmUcM+19rfn8B3n+WmxObN1UfDCtDGWtGOB/WO9/F8sEZwncx9RBDweWJ+MI7teXP10awCxMvP7RQb10GwZzPXX2x6OSoFKIXU8jN7zW38OmRlCCqBvw032WFJI5Nw0cTLT/zE02Wy7QSPg6ghsxxtYfnVy7UMzZerhwb1gP8TKUDNSAFqJlUA2ZCpnsOGjGxJVk9qS1I25asntSkvx1KqJ3UsRQ5mVcvRwSw5mlg+dEmndEvHqaOJcji3XOiQLumUbumYrg+Hc+V4evnQJZ3SLR3TtfYe4g9sNMexDybyngAAAABJRU5ErkJggg==" InformativeScreenshot="23b5f54d54496abed19e9cfea3c5b912.png" ScopeSelectorArgument="&lt;html app='msedge.exe' title='CRM' /&gt;" SearchSteps="FuzzySelector, Image, CV" Version="V2" Visibility="Interactive" />
                       </uix:NClick.Target>
                     </uix:NClick>
+                    <ui:WriteCell DisplayName="Write Cell Workbook" sap:VirtualizedContainerService.HintSize="388,116" sap2010:WorkflowViewState.IdRef="WriteCell_1" SheetName="Sheet1" Text="Complete" WorkbookPath="DEMO\Przechwytywanie Danych\DEMO_01\File Excel\customers.xlsx">
+                      <ui:WriteCell.Cell>
+                        <InArgument x:TypeArguments="x:String">
+                          <CSharpValue x:TypeArguments="x:String" sap2010:WorkflowViewState.IdRef="CSharpValue`1_22">"K"+(ZeroBaseIndex+2).ToString()</CSharpValue>
+                        </InArgument>
+                      </ui:WriteCell.Cell>
+                    </ui:WriteCell>
                   </Sequence>
                 </ActivityAction>
               </ui:ForEachRow.Body>
