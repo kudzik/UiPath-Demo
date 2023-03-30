@@ -497,7 +497,8 @@
           "Value": "N/A",
           "ValueSource": "Property"
         },
-        "Values": {
+        "Values": {},
+        "Arguments": {
           "TimeZone": {
             "Value": "TimeZone",
             "ValueSource": "Property"
