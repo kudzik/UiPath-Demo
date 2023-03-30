@@ -3,8 +3,9 @@
   "description": "Blank Process",
   "main": "Main.xaml",
   "dependencies": {
-    "UiPath.Excel.Activities": "[2.19.0-preview]",
+    "UiPath.Excel.Activities": "[2.20.0-preview]",
     "UiPath.Mail.Activities": "[1.18.2]",
+    "UiPath.OpenAI.IntegrationService.Activities": "[5.0.1-preview]",
     "UiPath.System.Activities": "[23.4.1-preview]",
     "UiPath.Testing.Activities": "[23.4.0-preview]",
     "UiPath.UIAutomation.Activities": "[23.4.1-preview]"
@@ -13,7 +14,7 @@
   "entitiesStores": [],
   "schemaVersion": "4.0",
   "studioVersion": "23.4.0.0",
-  "projectVersion": "1.0.5",
+  "projectVersion": "1.0.7",
   "runtimeOptions": {
     "autoDispose": false,
     "netFrameworkLazyLoading": false,
