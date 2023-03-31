@@ -5,6 +5,7 @@
   "dependencies": {
     "UiPath.Excel.Activities": "[2.20.0-preview]",
     "UiPath.Mail.Activities": "[1.18.2]",
+    "UiPath.MicrosoftOffice365.Activities": "[2.1.1]",
     "UiPath.OpenAI.IntegrationService.Activities": "[5.0.1-preview]",
     "UiPath.System.Activities": "[23.4.1-preview]",
     "UiPath.Testing.Activities": "[23.4.0-preview]",
